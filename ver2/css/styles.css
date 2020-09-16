@@ -1,0 +1,159 @@
+body{
+    background: skyblue;
+    align-items: center;
+}
+
+.chat_space{
+    margin: auto;
+    width: 60%;
+}
+
+#output{
+    padding-left: 10px;
+    border-radius: 8px;
+    /* height: 800px; */
+
+}
+
+.charaset_space{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.charaset_comment{
+    width: 50%;
+    text-align: center;
+}
+
+.charaset{
+    margin: auto;
+    padding-top: 19px;
+    display: flex;
+    list-style: none;
+    align-items: center;
+    justify-content: space-around;
+    width: 50%;
+}
+
+.imgs{
+    margin-left: 30px;
+}
+
+.icon_img{
+    border-radius: 50%;
+}
+
+.input_space{
+    width: 100%;
+}
+
+.input_name{
+    display: flex;
+    width: 100%;
+    height: 100px;
+    align-items: center;
+}
+
+.input_name_comment{
+    width: 50%;
+    text-align: center
+}
+
+.input_name_text{
+    width: 50%;
+    height: 30px;
+}
+
+#uname{
+    width: 100%;
+    height: 100%;
+    resize: none; /* これでユーザーのリサイズをできなくする */
+    border: 1px solid #ddd; /* 枠線をつけて領域を分かりやすく */
+    box-sizing: border-box; 
+    /* border-radius: 50%; */
+}
+
+.input_contents_wrapper{
+    display: flex;
+    margin: auto;
+    width: 100%;
+    margin-top: 25px;
+}
+
+.input_contents_text{
+    width: 80%;
+}
+
+.input_contents_button{
+    width: 20%;
+}
+
+#text{
+    width: 100%;
+    height: 100%;
+    resize: none; /* これでユーザーのリサイズをできなくする */
+    border: 1px solid #ddd; /* 枠線をつけて領域を分かりやすく */
+    box-sizing: border-box; 
+    /* border-radius: 50%; */
+}
+
+#send{
+    width: 100%;
+    height: 100%;
+    background: #61E739;
+    color: #fff;
+    font-size: 2.0rem;
+    font-weight: bold;
+    border: 0;
+}
+
+.chat_area{
+    display: flex;
+    margin-top: 20px;
+}
+
+.chat_icon{
+    border-radius: 50%;
+}
+.chat_name_comment_time{
+    margin-left: 20px;
+}
+
+.chat_name_time{
+    display: flex;
+    font-size:7px;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.chat_name{
+    font-size:7px
+}
+
+.chat_time{
+    font-size:7px
+}
+.chatcomment{
+    margin-top: 5px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 16px 24px;
+    max-width: 100%;
+    line-height: 1.8;
+    position: relative;
+}
+.chatcomment::before{
+    /* background: #fff; */
+    
+    content: '';
+    width: 0;
+    height: 0;
+    /* border: 8px solid #fff; */
+    border: 8px solid transparent;
+    border-right-color: #fff;
+    position: absolute;
+    top: 12px;
+    left: -16px;
+}

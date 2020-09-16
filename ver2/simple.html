@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/styles.css">
+<title>Chatアプリ</title>
+</head>
+<body>
+
+<!-- コンテンツ表示画面 -->
+
+<div class="chat_space">
+    <div id="output" style="height:500px;overflow:auto;border:7px solid  gray;">
+    </div>
+    <div class="charaset_space">
+        <div class="charaset_comment">  
+            キャラクターを選択してね！
+        </div>
+        <div>
+            <ul  class="charaset">
+                <li class="imgs" data-img="0"><img src="imgs/長州力.jpg" width="100" class=icon_img></li>
+                <li class="imgs" data-img="1"><img src="imgs/猪木.jpg" width="100" class=icon_img></li>
+                <li class="imgs" data-img="2"><img src="imgs/天龍.jpg" width="100" class=icon_img></li>
+            </ul>
+        </div>
+    </div>
+    <div class="input_space">
+        <div class="input_name">
+            <div class="input_name_comment">
+                名前を入力してね！
+            </div>
+            <div class="input_name_text">
+                <input type="text" id="uname">
+            </div>
+        </div>
+        <div class="input_contents_wrapper">
+            <div class="input_contents_text">
+                <textarea  id="text" cols="30" rows="3"></textarea>
+            </div>
+            <div class="input_contents_button">
+                <button id="send">送信</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 
+<div class="chat_area">
+    <div class="chat_icon_wrapper">
+        <img src="imgs/buke.png" width="50" class="chat_icon">
+    </div>
+    <div class="chat_name_comment_time">
+        <div class="chat_name_time">
+            <div class="chat_name">
+                hasegawa
+            </div>
+            <div class="chat_time">
+                23:19
+            </div>
+        </div>
+        <div class="chatcomment">
+            アイウエオoooooooooooooooooo
+        </div>        
+    </div>
+</div> -->
+
+<!--/ コンテンツ表示画面 -->
+
+
+
+<!-- JQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- JQuery -->
+
+
+<!--** 以下Firebase **-->
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.20.0/firebase.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "***",
+    authDomain: "dev17-25f94.firebaseapp.com",
+    databaseURL: "https://dev17-25f94.firebaseio.com",
+    projectId: "dev17-25f94",
+    storageBucket: "dev17-25f94.appspot.com",
+    messagingSenderId: "220740325729",
+    appId: "1:220740325729:web:751283f7061b709bd97520"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const ref = firebase.database().ref();
+  //   ユニークキーを自動で採番してください
+
+// アイコン処理
+let d =0;
+const img=["長州力.jpg","猪木.jpg","天龍.jpg"];
+$(".imgs").on("click",function(){
+    d=$(this).attr("data-img");
+    // $(this).css({
+    //     border: "red 2px solid"
+    // });
+})
+
+// 関数定義
+function send(){
+    const uname =$("#uname").val();
+    const text =$("#text").val();
+    let now = new Date();
+    let h = now.getHours();          //時
+    let m = now.getMinutes();        //分 
+    let time =h+":"+m; 
+    alert(uname+text);
+    const msg ={
+            time:time,
+            uname:uname,
+            text:text,
+            icon:d
+    };
+    console.log(msg);
+    ref.push(msg);
+    // $(".imgs").css
+
+}
+// 送信コマンド
+$("#send").on("click",function(){
+    send();
+});
+// 受信処理
+ref.on("child_added",function(data){
+    const v =data.val();// 送信されたオブジェクトを取得
+    const k =data.key;// ユニークキーを取得
+    console.log(v.icon);
+    let html ='<div class="chat_area">';
+    html+='<div class="chat_icon_wrapper">'
+    html+='<img src="imgs/'
+    html+=img[v.icon]
+    html+='" width="50" class="chat_icon">'
+    html+='</div>'
+    html+='<div class="chat_name_comment_time">'
+    html+='<div class="chat_name_time">'
+    html+='<div class="chat_name">'
+    html+=v.uname
+    html+='</div>'
+    html+='<div class="chat_time">'
+    html+=v.time
+    html+='</div>'
+    html+='</div>'
+    html+='<div class="chatcomment">'
+    html+=v.text
+    html+='</div>'
+    html+='</div>'
+    html+='</div>'
+   $("#output").append(html);
+    let h=$("#output").get(0).scrollHeight;
+    $("#output").scrollTop(h);  
+});
+
+
+// イベント情報取得
+$("#text").on("keydown",function(e){
+    // Console.log(e);
+    if(e.keyCode==13){
+        send();
+    }
+});
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
